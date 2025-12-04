@@ -1,16 +1,30 @@
-# Project XYZ
+# King County Housing Analytics 🏠
 
-**Project XYZ** is a comprehensive data analysis tool designed to streamline data exploration, analysis, and visualisation. The tool supports multiple data formats and provides an intuitive interface for both novice and expert data scientists.
+![https://github.com/dumindagamage/Home-Value-Analysis/blob/wip/resources/images/home_analysis_banner.png?raw=true)
 
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+---
 
+## Executive Summary
+**Client:** King County Real Estate Agency.  
+**Goal:** The client wants to launch a digital dashboard to assist two user groups:
+1. **Buyers:** Finding undervalued properties and understanding affordability.
+2. **Sellers:** Determining the optimal listing time and renovation strategy.
 
 ## Dataset Content
-* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size of 100Gb.
+* This project analyzes **21,613 property sales** (May 2014 - May 2015) to uncover statistical insights and builds a Machine Learning model to predict house prices.
 
 
 ## Business Requirements
-* Describe your business requirements
+### 🏷️ User Group 1: Buyers
+* **Affordability:** Identify the top 10 most affordable zip codes.
+* **Feature Importance:** Determine how house size (`sqft_living`) and condition impact price.
+* **Value Assessment:** Quantify the premium for "Waterfront" and "View" properties.
+* **Prediction:** Estimate fair market value to make competitive offers.
+
+### 💰 User Group 2: Sellers
+* **ROI Analysis:** Determine if renovations yield a statistically significant return.
+* **Timing:** Identify the best month to sell for maximum profit.
+* **Listing Strategy:** Set optimal prices based on neighborhood trends.
 
 
 ## Hypothesis and how to validate?
