@@ -13,7 +13,6 @@
 ## Dataset Content
 * This project analyzes **21,613 property sales** (May 2014 - May 2015) to uncover statistical insights and builds a Machine Learning model to predict house prices.
 
-
 ## Business Requirements
 ### 🏷️ User Group 1: Buyers
 * **Affordability:** Identify the top 10 most affordable zip codes.
