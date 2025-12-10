@@ -25,6 +25,7 @@ The project uses the **King County House Sales dataset** (`kc_house_data.csv`).
 * **Volume:** ~21,613 records (from May 2014 - May 2015)
 * **Features:** 21 variables including Price (Target), Bedrooms, Bathrooms, Sqft Living, Floors, Waterfront, View, Condition, Grade, Zipcode, and Year Built.
 * **Data Dictionary:**
+
 | Variable | Data Type | Description |
 | :--- | :--- | :--- |
 | **id** | String | A unique identifier for each home sold. |
@@ -142,13 +143,13 @@ The research methodologies were chosen based on the specific distribution of the
 ## The rationale to map the business requirements to the Data Visualisations
 | Business Requirement | Data Visualisation(s) | Rationale |
 | :--- | :--- | :--- |
-| **🏷️ User Group 1: Buyers** | | |
+| **🏷️ Buyers** | | |
 | **1. Affordability:**<br>Identify the top 10 most affordable zip codes. | **Bar Chart:**<br>Top 10 Zip Codes by Median Price. | **Validates Hypothesis 1.**<br>A bar chart allows for a clear ranking of categorical data (zip codes). We use the **Median** rather than the Mean to prevent high-priced outliers (luxury estates) from skewing the perception of affordability, ensuring buyers see a realistic entry point. |
 | **2. Value Assessment:**<br>Quantify the premium for "Waterfront" properties. | **Box Plot, Bar Plot & Mann-Whitney U Test:**<br>Price distribution by Waterfront status. | **Validates Hypothesis 2.**<br>As established in Notebook 1, price data is **non-normal**. A Box Plot visually contrasts the spread and outliers of the two groups, while the Mann-Whitney U test provides the necessary non-parametric statistical confirmation that the premium is significant and not due to chance. |
 | **3. Feature Importance:**<br>Determine if House Grade or Condition matters more. | **Heatmap, Spearman Correlation, Box Plot & Bar Plot,:**<br>Interaction between Grade, Condition, and Price. | **Validates Hypothesis 3.**<br>Since Grade and Condition are **ordinal** variables (ranked categories), Spearman Correlation is the appropriate statistical measure. The heatmap visualizes the interaction, confirming that higher construction grades correlate more strongly with price than cosmetic condition. |
 | **4. Prediction:**<br>Estimate fair market value to make competitive offers. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>House prices are influenced by **non-linear relationships** (e.g., the interaction between latitude/longitude and property size). A Random Forest model captures these complexities better than simple linear formulas, providing a "Fair Value" estimate to the buyers |
-| **💰 User Group 2: Sellers** | | |
-**5. Feature Value:**<br>Identify and validate specific home features that add the most financial value. | **Heatmap & Validation Chart:**<br>Feature Correlation (Pearson vs. Spearman). | **Feature Hierarchy & Validation.**<br>Sellers need a reliable hierarchy of value. I used a dual-method comparison (Pearson vs. Spearman) to validate that **Living Space** and **Grade** are the top drivers, ensuring outliers didn't skew the results. The analysis visually proves that **Bathrooms** outperform **Bedrooms**, allowing sellers to prioritize the right attributes in marketing. |
+| **💰 Sellers** | | |
+**5. Feature Value:**<br>Identify and validate specific home features that add the most financial value. | **Heatmap & Validation Chart:**<br>Feature Correlation (Pearson vs. Spearman). | **Validates Hypothesis 6.**<br>Sellers need a reliable hierarchy of value. I used a dual-method comparison (Pearson vs. Spearman) to validate that **Living Space** and **Grade** are the top drivers, ensuring outliers didn't skew the results. The analysis visually proves that **Bathrooms** outperform **Bedrooms**, allowing sellers to prioritize the right attributes in marketing. |
 | **6. Timing:**<br>Identify the best month to sell for maximum profit. | **Line Chart (Time-Series):**<br>Median Price vs. Month Sold. | **Validates Hypothesis 4.**<br>To identify seasonal trends, a time-series view is essential. This visualization exposes the cyclical nature of the market, highlighting the Spring/Summer peak (April/May) to advise sellers on the optimal window for listing. |
 | **7. ROI Analysis:**<br>Determine if renovations yield a statistically significant return. | **Interaction Plot (Bar Chart):**<br>Price by Age Group grouped by Renovation Status. | **Validates Hypothesis 5.**<br>The value of renovation is **not uniform**. A simple average would hide the truth. This plot separates the data by Era (Pre-war, Mid-Century, Modern), revealing that Mid-Century homes yield a significantly higher ROI (~60%) than other eras. |
 | **8. Listing Strategy:**<br>Set optimal prices based on neighborhood trends. | **Predictive Model:**<br>Random Forest. | **Operationalizes Findings.**<br>While buyers use the model to find deals, sellers use it to establish a **baseline market value**. By inputting their specific home features, they get a data-driven starting price that removes emotional bias from the listing strategy. |
@@ -197,12 +198,12 @@ The project followed a 5-phase development lifecycle:
     * Streamlit app development and README creation.
 
 ### Challenges & Strategies
-    * Data Skewness & Quality: Addressed significant right-skewness in the target variable (price) by applying Log Transformations to improve model performance. Mitigated data quality issues, such as the erroneous "33-bedroom" outlier, through rigorous cleaning and domain-aware filtering.
-    * Computational Constraints: Overcame performance bottlenecks during Random Forest Hyperparameter Tuning on local hardware (laptop) by optimizing the feature set and prioritizing RandomizedSearchCV over exhaustive grid searches to balance accuracy with training time.
+* Data Skewness & Quality: Addressed significant right-skewness in the target variable (price) by applying Log Transformations to improve model performance. Mitigated data quality issues, such as the erroneous "33-bedroom" outlier, through rigorous cleaning and domain-aware filtering.
+* Computational Constraints: Overcame performance bottlenecks during Random Forest Hyperparameter Tuning on local hardware (laptop) by optimizing the feature set and prioritizing RandomizedSearchCV over exhaustive grid searches to balance accuracy with training time.
 
 ### Future Learning
-    * Advanced Modeling: I plan to explore Gradient Boosting algorithms (XGBoost, LightGBM) to potentially surpass the performance of the Random Forest model.
-    * Advanced Statistical Analysis: Aim to deepen expertise in Statistical Inference, specifically mastering the application of complex Parametric vs. Non-Parametric tests
+* Advanced Modeling: I plan to explore Gradient Boosting algorithms (XGBoost, LightGBM) to potentially surpass the performance of the Random Forest model.
+* Advanced Statistical Analysis: Aim to deepen expertise in Statistical Inference, specifically mastering the application of complex Parametric vs. Non-Parametric tests
 
 
 ## Deployment
@@ -244,14 +245,12 @@ To run this project locally, follow these steps:
 
 ### Content
 - The image in the README was generated with Google Gemini
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
 
-### Media
+### Media - TODO
 
 - The photos used on the home and sign-up page are from This Open-Source site
 - The images used for the gallery page were taken from this other open-source site
 
 
-
-## Acknowledgements (optional)
+## Acknowledgements - TODO
 * Thank the people who provided support through this project.
