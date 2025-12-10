@@ -173,11 +173,13 @@ Although this is a public dataset, ethical usage of data is paramount:
 * **Fairness:** We excluded variables that could introduce bias (e.g., zip codes were used for location value, not for any sort of demographic profiling).
 * **Usage:** Data is used strictly for educational and market analysis purposes, complying with Kaggle's open license terms.
 
-## Dashboard Design - TODO
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
-* How were data insights communicated to technical and non-technical audiences?
-* Explain how the dashboard was designed to communicate complex data insights to different audiences. 
+## Dashboard Design
+The dashboard was purposefully designed with accessibility for non-technical users in mind. Visualizations were selected for their clarity and ease of interpretation, ensuring insights are immediately understandable. Furthermore, the dedicated "General Recommendations" sections for both buyers and sellers synthesize key findings into plain language, allowing users to grasp critical market trends without needing to interpret complex charts.
+* **Project Overview:** A high-level summary of the dataset (Total Sales, Average Price) featuring an interactive map to visualize property distribution across King County.
+* **Buyer Insights:** Tools designed to help buyers find value. This section identifies the most affordable zip codes, analyzes the relationship between house size and price, and helps quantify the "Scenery Value" (View/Waterfront premiums).
+* **Seller Analytics:** Tools designed to maximize profit. This section highlights the best months to sell (Seasonality), ranks the most valuable home features, and calculates the ROI of renovations based on the property's era.
+* **Price Estimator:** An interactive prediction tool where users select their role (Buyer or Seller). It provides a specific "Fair Value" estimate with a calculated safety margin to help negotiate deals or set listing prices.
+
 
 ## Unfixed Bugs - TODO
 * Please mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation are not valid reasons to leave bugs unfixed.
@@ -202,16 +204,16 @@ The project followed a 5-phase development lifecycle:
     * Streamlit app development and README creation.
 
 ### Challenges & Strategies
-* Data Skewness & Quality: Addressed significant right-skewness in the target variable (price) by applying Log Transformations to improve model performance. Mitigated data quality issues, such as the erroneous "33-bedroom" outlier, through rigorous cleaning and domain-aware filtering.
-* Computational Constraints: Overcame performance bottlenecks during Random Forest Hyperparameter Tuning on local hardware (laptop) by optimizing the feature set and prioritizing RandomizedSearchCV over exhaustive grid searches to balance accuracy with training time.
+* **Data Skewness & Quality:** Addressed significant right-skewness in the target variable (price) by applying Log Transformations to improve model performance. Mitigated data quality issues, such as the erroneous "33-bedroom" outlier, through rigorous cleaning and domain-aware filtering.
+* **Computational Constraints:** Overcame performance bottlenecks during Random Forest Hyperparameter Tuning on local hardware (laptop) by optimizing the feature set and prioritizing RandomizedSearchCV over exhaustive grid searches to balance accuracy with training time.
 
 ### Future Learning
-* Advanced Modeling: I plan to explore Gradient Boosting algorithms (XGBoost, LightGBM) to potentially surpass the performance of the Random Forest model.
-* Advanced Statistical Analysis: Aim to deepen expertise in Statistical Inference, specifically mastering the application of complex Parametric vs. Non-Parametric tests
+* **Advanced Modeling:** I plan to explore Boosting algorithms (XGBoost, etc..) to potentially surpass the performance of the Random Forest model and dig deeper into hyper-parameter tuning. 
+* **Advanced Statistical Analysis:** Aim to deepen expertise in Statistical Inference, specifically mastering the application of complex Parametric vs. Non-Parametric tests.
 
 
 ## Deployment
-* The App live link is: https://YOUR_APP_NAME.streamlit.com/ 
+* The App live link is: https://house-price-analysis-kcha.streamlit.app/
 
 To run this project locally, follow these steps:
 
@@ -229,9 +231,8 @@ To run this project locally, follow these steps:
     ```
 4.  **Run the Streamlit Dashboard:**
     ```bash
-    streamlit run dashboard/app.py
+    streamlit run dashboard/dashboard.py
     ```
-
 
 ## Main Data Analysis Libraries
 * **Language:** Python 3.12.X
@@ -248,13 +249,17 @@ To run this project locally, follow these steps:
 * **AI Tools:** GitHub Co-Pilot, Google Gemini
 
 ### Content
-- The image in the README was generated with Google Gemini
+* The custom imagery featured in both the Dashboard and the README was generated using Google Gemini
 
-### Media - TODO
+### Media 
+* **Dataset:** [House Sales in King County, USA](https://www.kaggle.com/datasets/harlfoxem/housesalesprediction) (Kaggle).
+* **Header Image:** Custom dashboard banner created for this project (`resources/images/dashboard_header.png`).
+* **Icons:** Dashboard interface icons provided by Streamlit and FontAwesome.
 
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
 
-
-## Acknowledgements - TODO
-* Thank the people who provided support through this project.
+## Acknowledgements
+* **Code Institute:** For the Data Analytics course material and assessment guidelines.
+* **Kaggle:** For providing the open-source dataset used in this analysis.
+* **AI Tools:**
+    * **GitHub Copilot:** Used for code auto-completion and troubleshooting syntax errors.
+    * **Google Gemini:** Used for code optimization, debugging complex Pandas functions, and refining the technical documentation.
