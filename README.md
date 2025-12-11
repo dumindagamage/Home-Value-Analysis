@@ -81,14 +81,14 @@ The following hypotheses were posed at the project's inception and validated thr
 ## The rationale to map the business requirements to the Data Visualisations
 | Business Requirement | Data Visualisation(s) | Rationale & Hypothesis Outcome |
 | :--- | :--- | :--- |
-| **🏷️ User Group 1: Buyers** | | |
+| **Buyers** | | |
 | **1. Affordability:**<br>Identify the top 10 most affordable zip codes. | **Bar Chart:**<br>Top 10 Zip Codes by Median Price. | **Validates Hypothesis 1 (Confirmed).**<br>A bar chart allows for a clear ranking of zip codes. We use the **Median** to prevent high-priced outliers from skewing affordability perception. The analysis identified specific areas (e.g., 98002) where median prices are <50% of the county average. |
 | **2. Scenery & View Value:**<br>Quantify the premium for "Waterfront" and "High View" properties. | **Box Plots & Statistical Tests:**<br>Mann-Whitney U (Waterfront) & Kruskal-Wallis (View). | **Validates Hypothesis 2 (Confirmed).**<br>Since price data is non-normal, non-parametric tests were essential. **Mann-Whitney U** confirmed the waterfront premium is statistically significant, while **Kruskal-Wallis** proved that "Excellent" views (Rating 4) add substantial value over standard views. |
 | **3. Feature Importance:**<br>Determine if House Grade or Condition matters more. | **Heatmap & Spearman Correlation:**<br>Interaction between Grade, Condition, and Price. | **Validates Hypothesis 3 (Confirmed).**<br>Since Grade and Condition are ordinal variables, Spearman Correlation is appropriate. The heatmap visually confirms that **Grade (~0.65)** correlates far more strongly with price than **Condition (~0.04)**. |
 | **4. Prediction:**<br>Estimate fair market value to make competitive offers. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>House prices are influenced by non-linear relationships (e.g., location coordinates x size). Random Forest captures these complexities better than linear formulas, providing a precise "Fair Value" estimate. |
-| **💰 User Group 2: Sellers** | | |
+| **Sellers** | | |
 | **5. Feature Value:**<br>Identify specific home features that add the most financial value. | **Heatmap & Validation Chart:**<br>Feature Correlation (Pearson vs. Spearman). | **Validates Hypothesis 6 (Confirmed).**<br>A dual-method comparison (Pearson/Spearman) validated that **Living Space (0.70)** is the dominant price driver, significantly outperforming simple room counts like Bedrooms (0.32). This allows sellers to focus marketing on space rather than room number. |
-| **6. Timing:**<br>Identify the best month to sell for maximum profit. | **Line Chart (Time-Series):**<br>Median Price vs. Month Sold. | **Validates Hypothesis 4 (Confirmed).**<br>Time-series analysis reveals a clear cyclical trend. Median prices and volume consistently tick upward starting in **April/May**, confirming this as the optimal listing window. |
+| **6. Timing:**<br>Identify the best month to sell for maximum profit. | **Line Chart (Time-Series):**<br>Median Price vs. Month Sold **& Statistical Tests:** Kruskal-Wallis Test (Comparing > 2 groups on non-normal data) | **Validates Hypothesis 4 (Confirmed).**<br>Time-series analysis reveals a clear cyclical trend. Median prices and volume consistently tick upward starting in **April/May**, confirming this as the optimal listing window with statistical test as well. |
 | **7. ROI Analysis:**<br>Determine if renovations yield a statistically significant return. | **Interaction Plot (Bar Chart):**<br>Price by Age Group grouped by Renovation Status. | **Validates Hypothesis 5 (Confirmed).**<br>The value of renovation is not uniform. The interaction plot reveals that **Mid-Century homes (1950-1990)** yield a significantly higher ROI (~60%) from renovation compared to Pre-War or Modern homes. |
 | **8. Listing Strategy:**<br>Set optimal prices based on neighborhood trends. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>While buyers use the model to find deals, sellers use it to establish a **baseline market value**, ensuring they list aggressively but realistically based on their specific features. |
 
@@ -104,15 +104,15 @@ The analysis was executed in four phases:
 
 * **Phase 2: Data Cleaning, EDA & Transformation**
     * **Cleaning:** Handled missing values, removed duplicates, and corrected data types (e.g., converting `date` to datetime).
-    * **EDA:** Checked data distributions (univariate analysis) and explored relationships between variables (correlation analysis).
+    * **EDA:** Checked data distributions and explored relationships between variables.
     * **Feature Engineering:** Created new metrics to drive better insights, such as `price_per_sqft`, `house_age`, and `age_group` (Pre-War, Mid-Century, Modern).
 
 * **Phase 3: Hypothesis Testing (Buyer & Seller Personas)**
-    * **Analysis:** Performed deep-dive analysis to test specific questions (e.g., *Does renovation impact price differently by era?*).
-    * **Validation:** Used statistical tests (like Mann-Whitney U and Correlation) to prove that the findings were real, not just random chance.
+    * **Analysis:** Performed deep-dive analysis to test specific questions.
+    * **Validation:** Used statistical tests to prove that the findings were real, not just random chance.
 
 * **Phase 4: Predictive Modeling & Dashboarding**
-    * **Modeling:** Trained Machine Learning models (Random Forest) to estimate house prices.
+    * **Modeling:** Trained Machine Learning models to estimate house prices.
     * **Dashboard:** Built an interactive Streamlit dashboard to allow users to explore the data and findings themselves.
 
 ### 2. Data Management Strategy
@@ -133,7 +133,9 @@ The research methodologies were chosen based on the specific distribution of the
 * **Spearman Correlation:** Used for the "Feature Importance" analysis. Features like `Grade` (1-13) and `Condition` (1-5) are **ordinal** (ranked categories). Spearman correlation is more appropriate than Pearson for detecting monotonic relationships in ranked data.
 
 **Machine Learning Choices:**
-* **Random Forest Regressor:** Selected for the Price Prediction tool. Real estate data contains non-linear relationships (e.g., the complex interaction between latitude/longitude and price). Random Forest handles these non-linearities and feature interactions better than Linear Regression, resulting in a higher R² score (0.873) and a more accurate "Fair Value" estimate.
+* **Random Forest Regressor:** Selected for the Price Prediction tool. Real estate data contains non-linear relationships (e.g., the complex interaction between latitude/longitude and price). Random Forest handles these non-linearities and feature interactions better than Linear Regression, resulting in a higher R² score (0.872) and a more accurate "Fair Value" estimate.
+
+
 
 ## Analysis techniques used
 * **Methods & Limitations:** I used standard descriptive statistics (like calculating the mean and median) and created visualizations (histograms, boxplots, scatter plots) to find patterns. A main limitation was that the data is older and only covers one year, so I couldn't look at long-term price trends.
