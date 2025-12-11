@@ -72,7 +72,7 @@ MODEL_PATH = 'data/models/house_price_model.pkl'
 MODEL_METRICS = {
     "R2": 0.865,
     "MAE": 67640,
-    "RMSE": 129513
+    "RMSE": 132851
 }
 
 @st.cache_data # memory caching for data loading for memory optimization
