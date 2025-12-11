@@ -28,7 +28,6 @@ The project uses the **King County House Sales dataset** (`kc_house_data.csv`).
 
 | Variable | Data Type | Description |
 | :--- | :--- | :--- |
-| **id** | String | A unique identifier for each home sold. |
 | **date** | Date | The date the home sale was completed. |
 | **price** | Float | The price the home was sold for (Target Variable). |
 | **bedrooms** | Integer | Number of bedrooms in the house. |
@@ -63,44 +62,36 @@ The project uses the **King County House Sales dataset** (`kc_house_data.csv`).
 * **Timing:** Identify the best month to sell for maximum profit.
 * **Listing Strategy:** Set optimal prices based on neighborhood trends.
 
-## Project Hypothesis and Validation
-
-The following hypotheses were posed at the project's inception and validated through the data analysis process.
-
-### Hypothesis 1: There are distinct geographic clusters (zip codes) within King County that are significantly more affordable than the county median.
-* **Validation:** Analysis of median price per zip code visualized via bar charts.
-* **Outcome:** **Confirmed**. The analysis identified specific zip codes (e.g., 98002, 98168) where the median price is less than half of the county average, validating the "Affordability" user story.
-
-### Hypothesis 2: Properties with scenic attributes (Waterfront or High-Quality Views) command a statistically significant price premium compared to standard properties.
-* **Validation Tests:**
-    1.  **Mann-Whitney U Test (Waterfront):** Used to compare the binary "Waterfront vs. Non-Waterfront" groups.
-    2.  **Kruskal-Wallis H Test (View):** Used to compare the five distinct view categories (0–4) to ensure the price difference wasn't just random.
-* **Outcome:** **Confirmed**.
-    * **Waterfront:** Validated as the single most valuable binary feature.
-    * **View:** The Kruskal-Wallis test (Statistic: 1,936, p < 0.05) confirmed that view quality is a significant price driver.
-
-### Hypothesis 3: Construction Grade has a stronger impact on price than Condition.
-* **Validation:** Box plot and Bar Plot for the high level analysis of the each feature. Heatmap Interaction Analysis & Correlation Comparison.Use Spearman Correlation because Grade/Condition are ordinal categories
-* **Outcome:** **Confirmed** Grade (~0.65) is a far stronger correlation than Condition (~0.04).
-
-### Hypothesis 4: Sales prices follow a seasonal trend, suggesting an optimal window for sellers.
-* **Validation:** Time-series analysis of `Median Price` by `Month Sold`.Kruskal-Wallis Test (Comparing > 2 groups on non-normal data).
-* **Outcome:** **Confirmed**. The data shows a visible trend where median prices and sales volume tick upward starting in April/May, supporting the advice for sellers to list during these months for maximum potential profit. It confirmed by the statistical test as the p-value (p-unc) is far less than 0.05.
-
-### Hypothesis 5: The value of renovation is not uniform
-* **Validation:**  Interaction Plot (Age x Renovation).
-* **Outcome:** **Confirmed**. It confimrmed that the ROI varies significantly by era as Mid-Century (1950-1990) shows ~60% ROI. It provides a significantly higher ROI for Mid-Century homes (1950-1990) than for pre-war or modern homes.
-
-### Hypothesis 6:  `sqft_living` (total living space) has a significantly stronger correlation with Price than room counts (`bedrooms` or `bathrooms`), indicating that buyers value total usable space more than just the number of rooms."
-* **Validation Tests:**
-    1.  **Pearson Correlation Matrix:** Used to identify the strength of the linear relationship between Price and key features.
-    2.  **Spearman Rank Correlation:** *Secondary Test.* Used this to validate the rankings. Since Pearson can be sensitive to outliers (like mega-mansions), Spearman checks the "rank" order instead of raw values, ensuring the findings hold true even with skewed data.
-* **Outcome:** **Confirmed**. Total living space (`sqft_living`) is the dominant driver of price (Pearson: **0.70**), significantly outperforming simple room counts like `bedrooms` (Pearson: **0.32**).
-
 ## Project Management
 This project was managed using Agile methodologies with a **GitHub Project Board**.
 * **Kanban Board:** [Link to your GitHub Project Board](https://github.com/users/dumindagamage/projects/5/views/1)
 ![Project Board](https://github.com/dumindagamage/House-Price-Analysis/blob/wip/resources/images/project_board.png)
+
+## Project Hypothesis and Validation
+The following hypotheses were posed at the project's inception and validated through the data analysis process.
+
+* **Hypothesis 1:** Geographic location (Zip Code) is the primary driver of affordability, creating distinct clusters of accessible housing.
+* **Hypothesis 2:** Properties with scenic attributes (Waterfront or High-Quality Views) command a statistically significant price premium compared to standard properties.
+* **Hypothesis 3:** Construction Grade has a stronger correlation with price than Condition, implying buyers pay more for structural quality than cosmetic state.
+* **Hypothesis 4:** Sales prices follow a seasonal trend, suggesting an optimal window (Spring/Summer) for sellers to maximize profit.
+* **Hypothesis 5:** The ROI of renovation is not uniform; it provides a significantly higher return for Mid-Century homes (1950-1990) than for pre-war or modern builds.
+* **Hypothesis 6:** Total living space (`sqft_living`) is a stronger predictor of price than simple room counts (`bedrooms` or `bathrooms`), indicating buyers value overall volume over segmentation.
+
+
+## The rationale to map the business requirements to the Data Visualisations
+| Business Requirement | Data Visualisation(s) | Rationale & Hypothesis Outcome |
+| :--- | :--- | :--- |
+| **🏷️ User Group 1: Buyers** | | |
+| **1. Affordability:**<br>Identify the top 10 most affordable zip codes. | **Bar Chart:**<br>Top 10 Zip Codes by Median Price. | **Validates Hypothesis 1 (Confirmed).**<br>A bar chart allows for a clear ranking of zip codes. We use the **Median** to prevent high-priced outliers from skewing affordability perception. The analysis identified specific areas (e.g., 98002) where median prices are <50% of the county average. |
+| **2. Scenery & View Value:**<br>Quantify the premium for "Waterfront" and "High View" properties. | **Box Plots & Statistical Tests:**<br>Mann-Whitney U (Waterfront) & Kruskal-Wallis (View). | **Validates Hypothesis 2 (Confirmed).**<br>Since price data is non-normal, non-parametric tests were essential. **Mann-Whitney U** confirmed the waterfront premium is statistically significant, while **Kruskal-Wallis** proved that "Excellent" views (Rating 4) add substantial value over standard views. |
+| **3. Feature Importance:**<br>Determine if House Grade or Condition matters more. | **Heatmap & Spearman Correlation:**<br>Interaction between Grade, Condition, and Price. | **Validates Hypothesis 3 (Confirmed).**<br>Since Grade and Condition are ordinal variables, Spearman Correlation is appropriate. The heatmap visually confirms that **Grade (~0.65)** correlates far more strongly with price than **Condition (~0.04)**. |
+| **4. Prediction:**<br>Estimate fair market value to make competitive offers. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>House prices are influenced by non-linear relationships (e.g., location coordinates x size). Random Forest captures these complexities better than linear formulas, providing a precise "Fair Value" estimate. |
+| **💰 User Group 2: Sellers** | | |
+| **5. Feature Value:**<br>Identify specific home features that add the most financial value. | **Heatmap & Validation Chart:**<br>Feature Correlation (Pearson vs. Spearman). | **Validates Hypothesis 6 (Confirmed).**<br>A dual-method comparison (Pearson/Spearman) validated that **Living Space (0.70)** is the dominant price driver, significantly outperforming simple room counts like Bedrooms (0.32). This allows sellers to focus marketing on space rather than room number. |
+| **6. Timing:**<br>Identify the best month to sell for maximum profit. | **Line Chart (Time-Series):**<br>Median Price vs. Month Sold. | **Validates Hypothesis 4 (Confirmed).**<br>Time-series analysis reveals a clear cyclical trend. Median prices and volume consistently tick upward starting in **April/May**, confirming this as the optimal listing window. |
+| **7. ROI Analysis:**<br>Determine if renovations yield a statistically significant return. | **Interaction Plot (Bar Chart):**<br>Price by Age Group grouped by Renovation Status. | **Validates Hypothesis 5 (Confirmed).**<br>The value of renovation is not uniform. The interaction plot reveals that **Mid-Century homes (1950-1990)** yield a significantly higher ROI (~60%) from renovation compared to Pre-War or Modern homes. |
+| **8. Listing Strategy:**<br>Set optimal prices based on neighborhood trends. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>While buyers use the model to find deals, sellers use it to establish a **baseline market value**, ensuring they list aggressively but realistically based on their specific features. |
+
 
 ## Project Plan
 ### 1. High-Level Steps
@@ -144,20 +135,6 @@ The research methodologies were chosen based on the specific distribution of the
 **Machine Learning Choices:**
 * **Random Forest Regressor:** Selected for the Price Prediction tool. Real estate data contains non-linear relationships (e.g., the complex interaction between latitude/longitude and price). Random Forest handles these non-linearities and feature interactions better than Linear Regression, resulting in a higher R² score (0.873) and a more accurate "Fair Value" estimate.
 
-## The rationale to map the business requirements to the Data Visualisations
-| Business Requirement | Data Visualisation(s) | Rationale |
-| :--- | :--- | :--- |
-| **Buyers** | | |
-| **1. Affordability:**<br>Identify the top 10 most affordable zip codes. | **Bar Chart:**<br>Top 10 Zip Codes by Median Price. | **Validates Hypothesis 1.**<br>A bar chart allows for a clear ranking of categorical data (zip codes). We use the **Median** rather than the Mean to prevent high-priced outliers (luxury estates) from skewing the perception of affordability, ensuring buyers see a realistic entry point. |
-| **2. Scenery & View Value:**<br>Quantify the premium for "Waterfront" and "High View" properties. | **Box Plots & Statistical Tests:**<br>Mann-Whitney U (Waterfront) & Kruskal-Wallis (View). | **Validates Hypothesis 2.**<br>Since price data is non-normal, I used non-parametric tests to confirm significance. The **Mann-Whitney U** test confirmed the waterfront premium, while the **Kruskal-Wallis** test proved that the view quality (from 0 to 4) significantly increases value, with "Excellent" views adding over $750k in median value. |
-| **3. Feature Importance:**<br>Determine if House Grade or Condition matters more. | **Heatmap, Spearman Correlation, Box Plot & Bar Plot,:**<br>Interaction between Grade, Condition, and Price. | **Validates Hypothesis 3.**<br>Since Grade and Condition are **ordinal** variables (ranked categories), Spearman Correlation is the appropriate statistical measure. The heatmap visualizes the interaction, confirming that higher construction grades correlate more strongly with price than cosmetic condition. |
-| **4. Prediction:**<br>Estimate fair market value to make competitive offers. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>House prices are influenced by **non-linear relationships** (e.g., the interaction between latitude/longitude and property size). A Random Forest model captures these complexities better than simple linear formulas, providing a "Fair Value" estimate to the buyers |
-| **Sellers** | | |
-**5. Feature Value:**<br>Identify and validate specific home features that add the most financial value. | **Heatmap & Validation Chart:**<br>Feature Correlation (Pearson vs. Spearman). | **Validates Hypothesis 6.**<br>Sellers need a reliable hierarchy of value. I used a dual-method comparison (Pearson vs. Spearman) to validate that **Living Space** and **Grade** are the top drivers, ensuring outliers didn't skew the results. The analysis visually proves that **Bathrooms** outperform **Bedrooms**, allowing sellers to prioritize the right attributes in marketing. |
-| **6. Timing:**<br>Identify the best month to sell for maximum profit. | **Line Chart (Time-Series):**<br>Median Price vs. Month Sold. | **Validates Hypothesis 4.**<br>To identify seasonal trends, a time-series view is essential. This visualization exposes the cyclical nature of the market, highlighting the Spring/Summer peak (April/May) to advise sellers on the optimal window for listing. |
-| **7. ROI Analysis:**<br>Determine if renovations yield a statistically significant return. | **Interaction Plot (Bar Chart):**<br>Price by Age Group grouped by Renovation Status. | **Validates Hypothesis 5.**<br>The value of renovation is **not uniform**. A simple average would hide the truth. This plot separates the data by Era (Pre-war, Mid-Century, Modern), revealing that Mid-Century homes yield a significantly higher ROI (~60%) than other eras. |
-| **8. Listing Strategy:**<br>Set optimal prices based on the neighborhood. | **Predictive Model:**<br>Random Forest Regressor. | **Operationalizes Findings.**<br>House prices are influenced by **non-linear relationships** (e.g., the interaction between latitude/longitude and property size). A Random Forest model captures these complexities better than simple linear formulas, providing a "Fair Value" estimate to the buyers |
-
 ## Analysis techniques used
 * **Methods & Limitations:** I used standard descriptive statistics (like calculating the mean and median) and created visualizations (histograms, boxplots, scatter plots) to find patterns. A main limitation was that the data is older and only covers one year, so I couldn't look at long-term price trends.
 
@@ -174,12 +151,17 @@ Although this is a public dataset, ethical usage of data is paramount:
 * **Usage:** Data is used strictly for educational and market analysis purposes, complying with Kaggle's open license terms.
 
 ## Dashboard Design
-The dashboard was purposefully designed with accessibility for non-technical users in mind. Visualizations were selected for their clarity and ease of interpretation, ensuring insights are immediately understandable. Furthermore, the dedicated "General Recommendations" sections for both buyers and sellers synthesize key findings into plain language, allowing users to grasp critical market trends without needing to interpret complex charts.
+The dashboard was designed with accessibility for non-technical users as a priority. Visualizations were carefully selected for clarity to ensure insights are immediately understandable, while Plotly was utilized to deliver a visually appealing and interactive user experience. Furthermore, the dedicated "General Recommendations" sections for both buyers and sellers synthesize key findings into plain language, allowing users to grasp critical market trends without needing to interpret complex charts.
 * **Project Overview:** A high-level summary of the dataset (Total Sales, Average Price) featuring an interactive map to visualize property distribution across King County.
 * **Buyer Insights:** Tools designed to help buyers find value. This section identifies the most affordable zip codes, analyzes the relationship between house size and price, and helps quantify the "Scenery Value" (View/Waterfront premiums).
 * **Seller Analytics:** Tools designed to maximize profit. This section highlights the best months to sell (Seasonality), ranks the most valuable home features, and calculates the ROI of renovations based on the property's era.
 * **Price Estimator:** An interactive prediction tool where users select their role (Buyer or Seller). It provides a specific "Fair Value" estimate with a calculated safety margin to help negotiate deals or set listing prices.
 
+## Conclusion
+This project demonstrates that successful real estate decisions in King County are driven by specific, quantifiable factors rather than general market movements:
+
+* **For Buyers:** Value is best found by prioritizing **"Mid-Century" homes with lower condition ratings but high construction grades**, as these offer the best price-per-square-foot entry point with high renovation potential. Buyers should also be aware that "Scenery" (Waterfront/View) commands a statistically validated premium that acts as a distinct luxury tax on top of standard living space costs.
+* **For Sellers:** Maximizing profit relies on timing and feature highlighting. Listing in **April/May** captures peak seasonal demand. Furthermore, marketing efforts should focus heavily on **Total Living Space** and **Construction Quality (Grade)** rather than room counts, as these are the strongest drivers of final sale price. For owners of homes built between 1950-1990, renovation offers a significantly higher ROI than for any other property era.
 
 ## Unfixed Bugs 
 At the time of final deployment, there are **no known unfixed bugs**. All core features, including the predictive model, dashboard filtering, and interactive charts, function as expected.
@@ -261,8 +243,8 @@ To run this project locally, follow these steps:
 
 
 ## Acknowledgements
-* **Code Institute:** For the Data Analytics course material and assessment guidelines.
+* **Code Institute:** For the Data Analytics curriculum, learning materials, and assessment criteria. Special thanks to the instructors and course coordinator for their support.
 * **Kaggle:** For providing the open-source dataset used in this analysis.
 * **AI Tools:**
-    * **GitHub Copilot:** Used for code auto-completion and troubleshooting syntax errors.
-    * **Google Gemini:** Used for code optimization, debugging complex Pandas functions, and refining the technical documentation.
+    * **GitHub Copilot:** For code auto-completion and troubleshooting syntax errors.
+    * **Google Gemini:** For code optimization, debugging complex functions, and refining the technical documentation.
