@@ -70,8 +70,8 @@ MODEL_PATH = 'data/models/house_price_model.pkl'
 
 # Model Metrics
 MODEL_METRICS = {
-    "R2": 0.872,
-    "MAE": 68047,
+    "R2": 0.865,
+    "MAE": 67640,
     "RMSE": 129513
 }
 
