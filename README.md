@@ -148,7 +148,9 @@ The dashboard was designed with accessibility for non-technical users as a prior
 * **Project Overview:** A high-level summary of the dataset (Total Sales, Average Price) featuring an interactive map to visualize property distribution across King County.
 * **Buyer Insights:** Tools designed to help buyers find value. This section identifies the most affordable zip codes, analyzes the relationship between house size and price, and helps quantify the "Scenery Value" (View/Waterfront premiums).
 * **Seller Analytics:** Tools designed to maximize profit. This section highlights the best months to sell (Seasonality), ranks the most valuable home features, and calculates the ROI of renovations based on the property's era.
-* **Price Estimator:** An interactive prediction tool where users select their role (Buyer or Seller). It provides a specific "Fair Value" estimate with a calculated safety margin to help negotiate deals or set listing prices.
+* **Price Estimator:** An interactive prediction tool where users select their role (Buyer or Seller). It provides a specific "Fair Value" estimate with a calculated safety margin (taking MAE as the margin) to help negotiate deals or set listing prices. 
+![](https://github.com/dumindagamage/House-Price-Analysis/blob/main/resources/images/dashboard.png?raw=true)
+
 
 ## 💡 Conclusion
 This project demonstrates that successful real estate decisions in King County are driven by specific, quantifiable factors rather than general market movements:
