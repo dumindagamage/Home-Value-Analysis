@@ -387,7 +387,7 @@ with tab2:
     with b1:
         # st.subheader("1. Most Affordable Zipcodes")
         st.markdown("""<div class="rec-card"><div class="rec-title">📍 Location & Affordability</div>
-            <div class="rec-text">- The data identifies specific zip codes, such as 98002 and 98168, as distinct affordable clusters that consistently trade at less than 50% of the county median price.</div></div>""", unsafe_allow_html=True)
+            <div class="rec-text">- The data identifies specific zip codes, such as 98002 and 98168, as distinct affordable clusters that trade at less than 50% of the county median price.</div></div>""", unsafe_allow_html=True)
         affordability = df.groupby('zipcode')['price'].median().sort_values().head(10).reset_index()
         overall_median = df['price'].median()
         
@@ -452,7 +452,7 @@ with tab2:
 
     st.markdown("---")
     st.markdown("""<div class="rec-card"><div class="rec-title">🌊 Scenery Attributes</div>
-                    <div class="rec-text">- Waterfront and High-View properties command a significant price jump independent of house size. Properties without these features reflect value based primarily on functional utility (Grade and Sq. Ft.).</div>
+                    <div class="rec-text">- Waterfront and High-View properties command a significant price jump independent of other key house features. Properties without these features reflect value based primarily on functional utility (Grade and Sq. Ft.).</div>
                     <div class="rec-text">- Filter by  <b>Zipcode</b> to analyze specific local market information.</div></div>""", unsafe_allow_html=True)
     b5, b6 = st.columns(2)
     with b5:

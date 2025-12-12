@@ -122,7 +122,7 @@ The research methodologies were chosen based on the specific distribution of the
     2.  **Decision Tree Regressor:** Tested for capturing non-linear patterns.
     3.  **Random Forest Regressor:** Tested for ensemble accuracy and generalization.
 
-* **Target Transformation:** Applied a Log Transformation (`np.log1p`) to the target variable (`price`). Since real estate data is highly right-skewed, this normalized the distribution, reduced the impact of extreme luxury outliers, and improved the model's ability to minimize relative error (stabilizing heteroscedasticity).
+* **Target Transformation:** Applied a Log Transformation (`np.log1p`) to the target variable (`price`). Since real estate data is highly right-skewed, this normalized the distribution, reduced the impact of extreme luxury outliers, and improved the model's ability to minimize relative error.
 
 * **Pre-Pipeline Processing:** Before entering the machine learning pipeline, the dataset underwent strict manual filtering to ensure integrity:
     * **Leakage Prevention:** Dropped columns directly containing target information (`price`, `price_log`, `price_per_sqft`) to prevent data leakage.
@@ -133,7 +133,7 @@ The research methodologies were chosen based on the specific distribution of the
     * **Feature Selection:** SmartCorrelatedSelection(threshold=0.85) from feature_engine. This automatically finds correlated features (like sqft_living vs sqft_above) and removes the redundant ones to reduce noise.
     * **Feature Scaling:** StandardScaler (Important for Linear models). `StandardScaler` normalized all numerical variables to a standard scale (mean=0, variance=1) to ensure consistent interpretation during the model evaluation phase.
 
-* **Hyperparameter Tuning (HPT):** Performed rigorous tuning on the Random Forest model using **GridSearchCV** with 5-fold cross-validation. The analysis revealed that the **default hyperparameters** actually yielded a higher R² score and better generalization than the tuned parameters. Consequently, the default configuration was retained to prevent overfitting.
+* **Hyperparameter Tuning (HPT):** Performed rigorous tuning on the Random Forest model using **GridSearchCV** with 3-fold cross-validation. The analysis revealed that the **default hyperparameters** actually yielded a higher R² score and better generalization than the tuned parameters. Consequently, the default configuration was retained to prevent overfitting.
 
 * **Final Selection (Random Forest Regressor):** The Random Forest model was selected for the final Price Prediction tool. It handled the dataset's non-linearities (e.g., the complex interaction between Latitude/Longitude and Price) significantly better than Linear Regression, achieving a robust **R² score of 0.865**.
 
@@ -147,7 +147,7 @@ The research methodologies were chosen based on the specific distribution of the
 
 * **Data Challenges:** The biggest challenge was "outliers" a few massive mansions that skewed the average prices. To fix this, I switched to using the median price instead of the average (mean) because it gives a more accurate picture of a "normal" home.
 
-* **Generative AI Usage:** I used AI tools to help me brainstorm questions to ask the data and to generate ideas first. It was also used heavily for fixing bugs in the code, optimizing and formatting the code, notebooks including charts, and formatting this README documentation. While AI tools facilitated workflow efficiency, all analytical reasoning, modeling strategies, and code execution were exclusively performed by the author, ensuring strict adherence to academic integrity.
+* **Generative AI Usage:** I used AI tools to help me brainstorm questions to ask the data and to generate ideas first. It was also used heavily for fixing bugs in the code, optimizing and formatting the code, notebooks including charts, and optinmizing, formatting this README documentation. While AI tools facilitated workflow efficiency, all analytical reasoning, modeling strategies, and code execution were exclusively performed by the author, ensuring strict adherence to academic integrity.
 
 ## ⚖️ Ethical Considerations & Data Privacy
 Although this is a public dataset, ethical usage of data is paramount:
